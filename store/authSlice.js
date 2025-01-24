@@ -26,6 +26,8 @@ export const { setStatus, setUser, setToken } = authSlice.actions
 
 export default authSlice.reducer
 
+//Register Thunk
+
 export function register(data) {
     return async function registerThunk(dispatch) {
         dispatch(setStatus(STATUSES.LOADING))
@@ -45,6 +47,7 @@ try {
     }
 }
 
+//Login thunk
 export function login(data) {
     return async function loginThunk(dispatch) {
         dispatch(setStatus(STATUSES.LOADING))
