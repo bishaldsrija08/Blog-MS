@@ -8,7 +8,7 @@ const Register = () => {
   const Navigate = useNavigate()
 
   const dispatch = useDispatch()
-  const handleChange = (data) => {
+  const handleRegister = (data) => {
     dispatch(register(data))
 
     //check the status value
@@ -20,7 +20,7 @@ const Register = () => {
   }
 
   return (
-    <Form type='Register' onSubmit={handleChange} />
+    <Form type='Register' onSubmit={handleRegister} />
   )
 }
 

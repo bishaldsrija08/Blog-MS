@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 
-const Form = ({type, onSubmit}) => {
+const Form = ({type, onSubmit, user}) => {
 
         const [data, setData] = useState({
             email: '',
@@ -32,8 +32,11 @@ const Form = ({type, onSubmit}) => {
                 <div className="relative px-4 py-10 bg-white shadow-lg sm:rounded-3xl sm:p-20">
                     <div className="max-w-md mx-auto">
                         <div>
+                        <h5 className="text-2xl font-semibold">
+                                {type === "Login" && `Hey, ${user?.username}`}
+                            </h5>
                             <h1 className="text-2xl font-semibold">
-                                {type === "Login" ? "Login here!" : "Register here!"}
+                                {type === "Login" ? "Login here!" : "Register here."}
                             </h1>
                         </div>
                         <div className="divide-y divide-gray-200">

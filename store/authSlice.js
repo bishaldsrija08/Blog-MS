@@ -54,7 +54,7 @@ export function login(data) {
         dispatch(setUser(data))
 try {
     const resopnse = await axios.post('https://react30.onrender.com/api/user/login', data)
-    if (resopnse.status === 201 && resopnse.data.token) {
+    if (resopnse.status === 200 && resopnse.data.token) {
         dispatch(setStatus(STATUSES.SUCCESS))
         dispatch(setToken(resopnse.data.token))
     } else {
