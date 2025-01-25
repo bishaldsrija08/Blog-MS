@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
-import axios from 'axios'
 import STATUSES from '../src/globals/status/statuses'
+import API from '../src/http'
 
 const authSlice = createSlice({
     name: 'auth',
@@ -32,18 +32,17 @@ export function register(data) {
     return async function registerThunk(dispatch) {
         dispatch(setStatus(STATUSES.LOADING))
         dispatch(setUser(data))
-try {
-    const resopnse = await axios.post('https://react30.onrender.com/api/user/register', data)
+        try {
+            const resopnse = await API.post('register', data)
 
-
-    if (resopnse.status === 201) {
-        dispatch(setStatus(STATUSES.SUCCESS))
-    } else {
-        dispatch(setStatus(STATUSES.ERROR))
-    }
-} catch (error) {
-    dispatch(setStatus(STATUSES.ERROR))
-}
+            if (resopnse.status === 201) {
+                dispatch(setStatus(STATUSES.SUCCESS))
+            } else {
+                dispatch(setStatus(STATUSES.ERROR))
+            }
+        } catch (error) {
+            dispatch(setStatus(STATUSES.ERROR))
+        }
     }
 }
 
@@ -52,16 +51,16 @@ export function login(data) {
     return async function loginThunk(dispatch) {
         dispatch(setStatus(STATUSES.LOADING))
         dispatch(setUser(data))
-try {
-    const resopnse = await axios.post('https://react30.onrender.com/api/user/login', data)
-    if (resopnse.status === 200 && resopnse.data.token) {
-        dispatch(setStatus(STATUSES.SUCCESS))
-        dispatch(setToken(resopnse.data.token))
-    } else {
-        dispatch(setStatus(STATUSES.ERROR))
-    }
-} catch (error) {
-    dispatch(setStatus(STATUSES.ERROR))
-}
+        try {
+            const resopnse = await API.post('login', data)
+            if (resopnse.status === 200 && resopnse.data.token) {
+                dispatch(setStatus(STATUSES.SUCCESS))
+                dispatch(setToken(resopnse.data.token))
+            } else {
+                dispatch(setStatus(STATUSES.ERROR))
+            }
+        } catch (error) {
+            dispatch(setStatus(STATUSES.ERROR))
+        }
     }
 }
