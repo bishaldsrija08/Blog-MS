@@ -1,32 +1,33 @@
-
-import { useDispatch, useSelector } from 'react-redux'
+import React, { useEffect } from 'react'
 import Form from './components/form/Form'
+import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { login, setStatus } from '../../../store/authSlice'
 import STATUSES from '../../globals/status/statuses'
-import { useEffect } from 'react'
 
 const Login = () => {
-  const { status, user } = useSelector((state) => state.auth)
-  const Navigate = useNavigate()
+  const {user,status} = useSelector((state)=>state.auth)
+  const navigate = useNavigate()
 
   const dispatch = useDispatch()
-  const handleLogin = (data) => {
-    dispatch(login(data))
+ const handleLogin = (data)=>{
+  dispatch(login(data))
+
+ }
+
+ useEffect(()=>{
+  // check the status value 
+  // status--> success -> navigate to login page else register page
+  if(status === STATUSES.SUCCESS){
+     navigate('/')
+     dispatch(setStatus(null))
+  }else{
+    navigate("/login")
   }
-
-  useEffect(() => {
-    //check the status value
-    if (status === STATUSES.SUCCESS) {
-      Navigate('/')
-      dispatch(setStatus(null))
-    } else {
-      Navigate('/login')
-    }
-  }, [status])
+ },[status])
   return (
-
-    <Form type='Login' user={user} onSubmit={handleLogin} />
+   
+  <Form type='Login' user={user} onSubmit={handleLogin} />
   )
 }
 
