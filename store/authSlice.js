@@ -1,5 +1,4 @@
 import {createSlice} from '@reduxjs/toolkit'
-import axios from 'axios'
 import STATUSES from '../src/globals/status/statuses'
 import API from '../src/http'
 
